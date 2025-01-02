@@ -16,8 +16,7 @@ class Todo{
     var date: Date = Date.now
     init(title: String) {
         self.title = title
-    }
-    
+    }    
     func formattedDate() -> String {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "ja_JP")

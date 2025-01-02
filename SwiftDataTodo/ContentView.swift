@@ -11,10 +11,11 @@ import SwiftData
 struct ContentView: View {
     
     @Environment(\.modelContext) private var modelContext
-    @Query(sort: [SortDescriptor(\Todo.date, order: .forward)]) private var todos:[Todo]
-//    @State private var path = [Todo]()
+    @Query(sort: [SortDescriptor(\Todo.priority, order: .reverse)]
+    ) private var todos:[Todo]
     @State private var path = NavigationPath()
     @State private var text = ""
+    @State private var sortOrder = SortDescriptor(\Todo.title)
     
     var body: some View {
         NavigationStack(path: $path) {
@@ -42,6 +43,13 @@ struct ContentView: View {
             }
             .navigationTitle("TODOリスト")
             .navigationDestination(for: Todo.self, destination: TodoDetailView.init)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Menu("sort", selection: $sortOrder){
+                        
+                    }
+                }
+            }
         }
     }
     
